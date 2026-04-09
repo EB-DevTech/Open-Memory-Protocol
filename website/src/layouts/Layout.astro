@@ -1,0 +1,568 @@
+---
+import '../styles/global.css';
+import Icons from '../components/Icons.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  canonical?: string;
+  type?: string;
+}
+
+const {
+  title,
+  description = "Open Memory Protocol (OMP) is a universal, vendor-neutral standard that gives you full ownership, backup, recovery, and portability of your AI conversations across ChatGPT, Claude, Gemini, and every platform.",
+  canonical = "https://openmemoryprotocol.com",
+  type = "website"
+} = Astro.props;
+
+const fullTitle = `${title} — Open Memory Protocol`;
+---
+
+<!doctype html>
+<html lang="en" itemscope itemtype="https://schema.org/WebPage">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Primary Meta -->
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="Open Memory Protocol, OMP, AI conversation backup, AI data portability, ChatGPT export, Claude export, Gemini export, AI memory, conversation history, data ownership, AI standard, open standard" />
+    <meta name="author" content="OMP Working Group" />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="https://openmemoryprotocol.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Open Memory Protocol" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://openmemoryprotocol.com/og-image.png" />
+
+    <!-- Structured Data: Organization -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Open Memory Protocol",
+      "url": "https://openmemoryprotocol.com",
+      "logo": "https://openmemoryprotocol.com/og-image.png",
+      "description": "An open standard for AI conversation portability, backup, and data ownership.",
+      "sameAs": [
+        "https://github.com/open-memory-protocol/open-memory-protocol"
+      ]
+    })} />
+
+    <!-- Structured Data: WebSite with SearchAction (AEO) -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Open Memory Protocol",
+      "url": "https://openmemoryprotocol.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://openmemoryprotocol.com/spec?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    })} />
+
+    <!-- Structured Data: TechArticle (for spec) -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Open Memory Protocol (OMP) v2.0 Specification",
+      "description": "A universal, vendor-neutral standard for user-owned AI conversation backup, recovery, and cross-platform portability.",
+      "author": { "@type": "Organization", "name": "OMP Working Group" },
+      "datePublished": "2026-04-01",
+      "dateModified": "2026-04-07",
+      "version": "2.0",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "inLanguage": "en",
+      "about": {
+        "@type": "Thing",
+        "name": "AI Conversation Portability"
+      }
+    })} />
+
+    <!-- Structured Data: FAQ (AEO) -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the Open Memory Protocol?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Open Memory Protocol (OMP) is an open standard that lets you backup, migrate, and own your AI conversations across every platform including ChatGPT, Claude, Gemini, Cursor, and more. Think of it as the iCloud of AI."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I export my ChatGPT conversations to Claude?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. OMP provides connectors that convert ChatGPT exports into the universal OMP format, which can then be imported into any OMP-compatible platform. The process is: Export from ChatGPT → Convert to OMP → Import to Claude."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is OMP free to use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The OMP specification is published under CC BY 4.0 and all code (SDKs, connectors, reference server) is Apache 2.0 licensed. The standard itself is completely free. There is also a hosted cloud service (Memory Vault) with free and paid tiers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does OMP compare to MCP or A2A?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "MCP (Model Context Protocol) connects AI to tools. A2A (Agent-to-Agent) governs communication between AI agents. OMP stores the resulting conversations from both. They are complementary standards — MCP and A2A handle the doing, OMP handles the remembering."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I self-host my own Memory Vault?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely. OMP provides a reference server as a Docker template that you can pull and run with a single command. It supports local-first, self-hosted, cloud, and hybrid deployment models."
+          }
+        }
+      ]
+    })} />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  </head>
+  <body>
+    <!-- Neural Background Canvas -->
+    <canvas id="neural-canvas" aria-hidden="true"></canvas>
+
+    <!-- Header -->
+    <header class="header" role="banner">
+      <div class="container header-inner">
+        <a href="/" class="logo" aria-label="Open Memory Protocol Home">
+          <div class="logo-mark">
+            <Icons name="brain" size={22} />
+          </div>
+          <span class="logo-text">OMP</span>
+        </a>
+
+        <nav class="nav" role="navigation" aria-label="Main navigation">
+          <a href="/spec" id="nav-spec">Specification</a>
+          <a href="/connectors" id="nav-connectors">Connectors</a>
+          <a href="https://github.com/open-memory-protocol/open-memory-protocol" target="_blank" rel="noopener" id="nav-github">
+            <Icons name="github" size={16} />
+            GitHub
+          </a>
+        </nav>
+
+        <div class="header-actions">
+          <a href="/vault" class="btn btn-primary btn-sm" id="nav-vault">
+            <Icons name="vault" size={16} />
+            Memory Vault
+          </a>
+        </div>
+
+        <!-- Mobile menu toggle -->
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Mobile Nav Overlay -->
+    <div class="mobile-nav" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
+      <a href="/spec">Specification</a>
+      <a href="/connectors">Connectors</a>
+      <a href="https://github.com/open-memory-protocol/open-memory-protocol" target="_blank" rel="noopener">GitHub</a>
+      <a href="/vault" class="btn btn-primary" style="margin-top: 1rem; width: 100%;">Memory Vault</a>
+    </div>
+
+    <!-- Main Content -->
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+      <div class="section-divider"></div>
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <a href="/" class="logo" aria-label="OMP Home">
+            <div class="logo-mark">
+              <Icons name="brain" size={18} />
+            </div>
+            <span class="logo-text">Open Memory Protocol</span>
+          </a>
+          <p class="footer-tagline">Your AI conversations belong to you.</p>
+          <p class="footer-license">Spec: CC BY 4.0  ·  Code: Apache 2.0</p>
+        </div>
+
+        <div class="footer-links">
+          <div class="link-group">
+            <h4>Standard</h4>
+            <a href="/spec">Specification v2.0</a>
+            <a href="/connectors">Connector Registry</a>
+            <a href="https://github.com/open-memory-protocol/open-memory-protocol/tree/main/spec/schemas" target="_blank" rel="noopener">JSON Schemas</a>
+          </div>
+          <div class="link-group">
+            <h4>Community</h4>
+            <a href="https://github.com/open-memory-protocol/open-memory-protocol" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://github.com/open-memory-protocol/open-memory-protocol/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a>
+            <a href="https://github.com/open-memory-protocol/open-memory-protocol/blob/main/CODE_OF_CONDUCT.md" target="_blank" rel="noopener">Code of Conduct</a>
+          </div>
+          <div class="link-group">
+            <h4>Product</h4>
+            <a href="/vault">Memory Vault</a>
+            <a href="/vault#pricing">Pricing</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="container">
+          <p>&copy; 2026 OMP Working Group. Built for the open web.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Neural Background Script -->
+    <script>
+      // Animated neural network background
+      const canvas = document.getElementById('neural-canvas');
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let width, height, nodes = [], mouse = { x: -1000, y: -1000 };
+        const NODE_COUNT = 60;
+        const CONNECTION_DIST = 150;
+        const MOUSE_DIST = 200;
+
+        function resize() {
+          width = canvas.width = window.innerWidth;
+          height = canvas.height = window.innerHeight;
+        }
+
+        function initNodes() {
+          nodes = [];
+          for (let i = 0; i < NODE_COUNT; i++) {
+            nodes.push({
+              x: Math.random() * width,
+              y: Math.random() * height,
+              vx: (Math.random() - 0.5) * 0.3,
+              vy: (Math.random() - 0.5) * 0.3,
+              r: Math.random() * 2 + 1,
+              pulse: Math.random() * Math.PI * 2,
+              speed: Math.random() * 0.02 + 0.005
+            });
+          }
+        }
+
+        function draw() {
+          ctx.clearRect(0, 0, width, height);
+
+          // Draw connections
+          for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+              const dx = nodes[i].x - nodes[j].x;
+              const dy = nodes[i].y - nodes[j].y;
+              const dist = Math.sqrt(dx * dx + dy * dy);
+              if (dist < CONNECTION_DIST) {
+                const alpha = (1 - dist / CONNECTION_DIST) * 0.12;
+                ctx.strokeStyle = `rgba(0, 212, 255, ${alpha})`;
+                ctx.lineWidth = 0.5;
+                ctx.beginPath();
+                ctx.moveTo(nodes[i].x, nodes[i].y);
+                ctx.lineTo(nodes[j].x, nodes[j].y);
+                ctx.stroke();
+              }
+            }
+          }
+
+          // Draw & update nodes
+          for (const node of nodes) {
+            node.pulse += node.speed;
+            const glow = Math.sin(node.pulse) * 0.3 + 0.4;
+            
+            // Mouse interaction
+            const mdx = node.x - mouse.x;
+            const mdy = node.y - mouse.y;
+            const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+            let extraGlow = 0;
+            if (mdist < MOUSE_DIST) {
+              extraGlow = (1 - mdist / MOUSE_DIST) * 0.6;
+            }
+
+            const finalGlow = Math.min(glow + extraGlow, 1);
+
+            ctx.beginPath();
+            ctx.arc(node.x, node.y, node.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(0, 212, 255, ${finalGlow})`;
+            ctx.fill();
+            
+            if (finalGlow > 0.5) {
+              ctx.beginPath();
+              ctx.arc(node.x, node.y, node.r * 3, 0, Math.PI * 2);
+              ctx.fillStyle = `rgba(0, 212, 255, ${finalGlow * 0.15})`;
+              ctx.fill();
+            }
+
+            node.x += node.vx;
+            node.y += node.vy;
+            if (node.x < 0 || node.x > width) node.vx *= -1;
+            if (node.y < 0 || node.y > height) node.vy *= -1;
+          }
+
+          requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', () => { resize(); initNodes(); });
+        window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+        
+        resize();
+        initNodes();
+        draw();
+      }
+
+      // Scroll reveal
+      const reveals = document.querySelectorAll('[data-reveal]');
+      const revealObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); revealObs.unobserve(e.target); } });
+      }, { threshold: 0.15 });
+      reveals.forEach(el => revealObs.observe(el));
+
+      // Mobile menu
+      const toggle = document.getElementById('mobile-toggle');
+      const mobileNav = document.getElementById('mobile-nav');
+      if (toggle && mobileNav) {
+        toggle.addEventListener('click', () => {
+          const open = toggle.classList.toggle('open');
+          mobileNav.classList.toggle('open');
+          toggle.setAttribute('aria-expanded', open.toString());
+        });
+      }
+    </script>
+  </body>
+</html>
+
+<style>
+  #neural-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* --- Header --- */
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 64px;
+    background: rgba(6, 11, 24, 0.75);
+    backdrop-filter: blur(16px) saturate(1.3);
+    border-bottom: 1px solid var(--color-surface-border);
+    z-index: 100;
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--color-text-bright);
+    font-weight: 700;
+    font-size: 1.15rem;
+  }
+
+  .logo-mark {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(var(--color-synapse-rgb), 0.1);
+    border: 1px solid rgba(var(--color-synapse-rgb), 0.2);
+    border-radius: 8px;
+    color: var(--color-synapse);
+  }
+
+  .nav {
+    display: none;
+    align-items: center;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 768px) {
+    .nav { display: flex; }
+  }
+
+  .nav a {
+    color: var(--color-text-muted);
+    font-weight: 500;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color var(--transition-fast);
+  }
+  .nav a:hover { color: var(--color-text-bright); }
+
+  .header-actions { display: none; }
+  @media (min-width: 768px) { .header-actions { display: flex; } }
+
+  .btn-sm {
+    padding: 0.35rem 0.9rem;
+    font-size: 0.8rem;
+  }
+
+  /* --- Mobile --- */
+  .mobile-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .mobile-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--color-text-muted);
+    transition: all var(--transition-fast);
+    border-radius: 1px;
+  }
+  .mobile-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .mobile-toggle.open span:nth-child(2) { opacity: 0; }
+  .mobile-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  @media (min-width: 768px) { .mobile-toggle { display: none; } }
+
+  .mobile-nav {
+    display: none;
+    position: fixed;
+    top: 64px;
+    left: 0;
+    width: 100%;
+    background: rgba(6, 11, 24, 0.95);
+    backdrop-filter: blur(16px);
+    padding: var(--space-6);
+    flex-direction: column;
+    gap: var(--space-4);
+    z-index: 99;
+    border-bottom: 1px solid var(--color-surface-border);
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a {
+    color: var(--color-text);
+    font-weight: 500;
+    padding: var(--space-2) 0;
+  }
+
+  /* --- Main --- */
+  main {
+    margin-top: 64px;
+    min-height: calc(100vh - 64px);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* --- Footer --- */
+  .footer {
+    position: relative;
+    z-index: 1;
+    background: var(--color-void);
+    padding-top: var(--space-16);
+  }
+
+  .footer-inner {
+    display: grid;
+    gap: var(--space-12);
+    padding-bottom: var(--space-12);
+  }
+
+  @media (min-width: 768px) {
+    .footer-inner {
+      grid-template-columns: 1fr 2fr;
+    }
+  }
+
+  .footer-tagline {
+    margin-top: 12px;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
+
+  .footer-license {
+    margin-top: 8px;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    opacity: 0.6;
+  }
+
+  .footer-links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-8);
+  }
+
+  @media (max-width: 480px) {
+    .footer-links { grid-template-columns: 1fr 1fr; }
+  }
+
+  .link-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .link-group h4 {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    margin-bottom: 4px;
+  }
+
+  .link-group a {
+    color: var(--color-text);
+    font-size: 0.85rem;
+  }
+  .link-group a:hover { color: var(--color-synapse); }
+
+  .footer-bottom {
+    border-top: 1px solid var(--color-surface-border);
+    padding: var(--space-6) 0;
+  }
+
+  .footer-bottom p {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    text-align: center;
+  }
+</style>

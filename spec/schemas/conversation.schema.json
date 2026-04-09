@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://openmemoryprotocol.com/schemas/v2.0/conversation.json",
+  "title": "OMP Conversation",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "title": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "platform": { "type": "string" },
+    "model": { "type": ["string", "null"] },
+    "message_count": { "type": "integer" },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "context": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "summary": { "type": "string" },
+    "language": { "type": "string" },
+    "extensions": { "type": "object" },
+    "messages": {
+      "type": "array",
+      "items": { "$ref": "message.schema.json" }
+    }
+  },
+  "required": ["id", "created_at", "updated_at", "platform", "message_count", "messages"]
+}

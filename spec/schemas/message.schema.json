@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://openmemoryprotocol.com/schemas/v2.0/message.json",
+  "title": "OMP Message",
+  "description": "A single conversational turn in the Open Memory Protocol format.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this message."
+    },
+    "role": {
+      "type": "string",
+      "enum": ["user", "assistant", "system", "tool"],
+      "description": "Who produced this message."
+    },
+    "content": {
+      "oneOf": [
+        { "type": "string" },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": { "type": "string" },
+              "text": { "type": "string" },
+              "media_type": { "type": "string" },
+              "data": { "type": "string" },
+              "filename": { "type": "string" },
+              "language": { "type": "string" },
+              "tool_name": { "type": "string" },
+              "tool_input": { "type": "object" },
+              "output": { "type": "string" }
+            },
+            "required": ["type"]
+          }
+        }
+      ]
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "model": {
+      "type": ["string", "null"]
+    },
+    "platform": {
+      "type": ["string", "null"]
+    },
+    "attachments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "filename": { "type": "string" },
+          "media_type": { "type": "string" },
+          "size_bytes": { "type": "integer" },
+          "data": { "type": "string" },
+          "source": { "type": "string" }
+        },
+        "required": ["filename", "media_type", "data"]
+      }
+    },
+    "tool_calls": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "token_usage": {
+      "type": "object",
+      "properties": {
+        "prompt": { "type": "integer" },
+        "completion": { "type": "integer" }
+      }
+    },
+    "annotations": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "extensions": {
+      "type": "object"
+    }
+  },
+  "required": ["id", "role", "content", "timestamp"]
+}

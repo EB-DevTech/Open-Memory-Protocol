@@ -1,0 +1,31 @@
+{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "title": "Help me plan a garden",
+  "created_at": "2026-03-15T09:30:00Z",
+  "updated_at": "2026-03-15T09:45:00Z",
+  "platform": "chatgpt",
+  "model": "gpt-4o",
+  "message_count": 2,
+  "tags": ["gardening", "home"],
+  "messages": [
+    {
+      "id": "msg-001",
+      "role": "user",
+      "content": "I have a 10x12 backyard in Houston, TX...",
+      "timestamp": "2026-03-15T09:30:00Z",
+      "model": null,
+      "platform": "chatgpt"
+    },
+    {
+      "id": "msg-002",
+      "role": "assistant",
+      "content": "Great! Houston is in USDA Zone 9a...",
+      "timestamp": "2026-03-15T09:30:12Z",
+      "model": "gpt-4o",
+      "platform": "chatgpt"
+    }
+  ],
+  "extensions": {
+    "chatgpt_conversation_template_id": null
+  }
+}

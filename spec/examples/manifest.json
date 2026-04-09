@@ -1,0 +1,18 @@
+{
+  "omp_version": "2.0",
+  "export_timestamp": "2026-04-07T12:00:00Z",
+  "user_id": "user_123456",
+  "source_platform": "multi-platform",
+  "counts": {
+    "conversations": 142,
+    "messages": 8753,
+    "memories": 67,
+    "attachments": 23
+  },
+  "date_range": {
+    "earliest": "2023-03-14T08:22:00Z",
+    "latest": "2026-04-07T11:58:00Z"
+  },
+  "platforms_included": ["chatgpt", "claude", "gemini"],
+  "checksum": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

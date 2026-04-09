@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://openmemoryprotocol.com/schemas/v2.0/archive.json",
+  "title": "OMP Archive Directory Structure",
+  "description": "Rules for validating the contents of an .omp.zip file.",
+  "type": "object",
+  "properties": {
+    "manifest.json": {
+      "$ref": "manifest.schema.json"
+    },
+    "conversations": {
+      "type": "array",
+      "items": { "type": "string", "pattern": ".*\\.json$" }
+    },
+    "memories": {
+      "type": "array",
+      "items": { "type": "string", "pattern": ".*\\.json$" }
+    },
+    "attachments": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "required": ["manifest.json", "conversations"]
+}

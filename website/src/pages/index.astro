@@ -1,0 +1,743 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icons from '../components/Icons.astro';
+---
+
+<Layout
+  title="The iCloud of AI — Own Your Conversations"
+  description="Open Memory Protocol (OMP) is a universal standard for backing up, migrating, and owning your AI conversations across ChatGPT, Claude, Gemini, and every platform. Free and open source."
+  canonical="https://openmemoryprotocol.com"
+>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero" aria-labelledby="hero-heading">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge animate-in">
+          <span class="pulse-dot"></span>
+          OMP v2.0 Specification — Draft
+        </div>
+        <h1 id="hero-heading" class="animate-in delay-1">
+          Your AI conversations<br />
+          <span class="gradient-text">belong to you.</span>
+        </h1>
+        <p class="hero-subtitle animate-in delay-2">
+          The Open Memory Protocol is a universal standard for owning, backing up, and migrating your AI conversations across <strong>ChatGPT</strong>, <strong>Claude</strong>, <strong>Gemini</strong>, and every platform.
+        </p>
+        <div class="hero-actions animate-in delay-3">
+          <a href="/spec" class="btn btn-primary" id="cta-spec">
+            Read the Specification
+            <Icons name="arrow-right" size={16} />
+          </a>
+          <a href="https://github.com/open-memory-protocol/open-memory-protocol" class="btn btn-secondary" id="cta-github" target="_blank" rel="noopener">
+            <Icons name="github" size={16} />
+            Star on GitHub
+          </a>
+        </div>
+        <div class="hero-stats animate-in delay-4">
+          <div class="stat">
+            <span class="stat-value">5</span>
+            <span class="stat-label">Core Operations</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-value">7+</span>
+            <span class="stat-label">Platform Connectors</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-value">3</span>
+            <span class="stat-label">Conformance Levels</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Neural Synapse Visualization -->
+      <div class="hero-visual animate-in delay-3" aria-hidden="true">
+        <div class="synapse-diagram">
+          <!-- Platform Nodes -->
+          <div class="s-node platform chatgpt" style="--x: 15%; --y: 12%;">
+            <div class="node-ring"></div>
+            <span>ChatGPT</span>
+          </div>
+          <div class="s-node platform claude" style="--x: 50%; --y: 5%;">
+            <div class="node-ring"></div>
+            <span>Claude</span>
+          </div>
+          <div class="s-node platform gemini" style="--x: 85%; --y: 12%;">
+            <div class="node-ring"></div>
+            <span>Gemini</span>
+          </div>
+          <div class="s-node platform cursor" style="--x: 8%; --y: 42%;">
+            <div class="node-ring"></div>
+            <span>Cursor</span>
+          </div>
+          <div class="s-node platform perplexity" style="--x: 92%; --y: 42%;">
+            <div class="node-ring"></div>
+            <span>Perplexity</span>
+          </div>
+
+          <!-- Synapse Lines (SVG) -->
+          <svg class="synapse-lines" viewBox="0 0 500 500" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="syn1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:rgba(0,212,255,0.6)" />
+                <stop offset="100%" style="stop-color:rgba(129,140,248,0.4)" />
+              </linearGradient>
+              <linearGradient id="synClaude" x1="50%" y1="0%" x2="50%" y2="100%">
+                <stop offset="0%" style="stop-color:rgba(217,119,87,0.8)" />
+                <stop offset="100%" style="stop-color:rgba(0,212,255,0.5)" />
+              </linearGradient>
+            </defs>
+            <!-- Lines from platforms to vault (coordinates = CSS % × 5) -->
+            <line x1="75" y1="60" x2="250" y2="340" class="syn-line syn-1" />
+            <path d="M 250 25 C 180 120, 200 250, 250 340" class="syn-line syn-2" fill="none" stroke="url(#synClaude)" stroke-width="1.5" />
+            <line x1="425" y1="60" x2="250" y2="340" class="syn-line syn-3" />
+            <line x1="40" y1="210" x2="250" y2="340" class="syn-line syn-4" />
+            <line x1="460" y1="210" x2="250" y2="340" class="syn-line syn-5" />
+            <!-- Cross connections -->
+            <line x1="75" y1="60" x2="250" y2="25" class="syn-line syn-cross" />
+            <line x1="250" y1="25" x2="425" y2="60" class="syn-line syn-cross" />
+            <line x1="40" y1="210" x2="75" y2="60" class="syn-line syn-cross" />
+            <line x1="460" y1="210" x2="425" y2="60" class="syn-line syn-cross" />
+          </svg>
+
+          <!-- Central Vault Node -->
+          <div class="s-node vault-core" style="--x: 50%; --y: 68%;">
+            <div class="vault-glow"></div>
+            <div class="vault-inner">
+              <Icons name="vault" size={28} />
+            </div>
+            <span>Your Memory Vault</span>
+          </div>
+
+          <!-- Floating particles -->
+          <div class="particle p1"></div>
+          <div class="particle p2"></div>
+          <div class="particle p3"></div>
+          <div class="particle p4"></div>
+          <div class="particle p5"></div>
+          <div class="particle p6"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ===== PROBLEM ===== -->
+  <section class="section" id="problem" aria-labelledby="problem-heading">
+    <div class="container">
+      <div class="text-center max-w-prose mx-auto" data-reveal>
+        <p class="section-label">The Problem</p>
+        <h2 id="problem-heading">Your conversations are trapped in silos</h2>
+        <p style="margin-top: var(--space-4);">Every AI platform stores your data in a proprietary format. Switch from ChatGPT to Claude? You lose everything — every preference, every decision, every piece of context.</p>
+      </div>
+
+      <div class="silo-grid" data-reveal>
+        <div class="silo-card">
+          <div class="silo-header chatgpt-accent">ChatGPT</div>
+          <p class="silo-format">Nested JSON DAG</p>
+          <p class="silo-verdict">Cannot export to any other platform</p>
+        </div>
+        <div class="silo-card">
+          <div class="silo-header claude-accent">Claude</div>
+          <p class="silo-format">Flat JSON with artifacts</p>
+          <p class="silo-verdict">No other platform accepts it</p>
+        </div>
+        <div class="silo-card">
+          <div class="silo-header gemini-accent">Gemini</div>
+          <p class="silo-format">Google Takeout</p>
+          <p class="silo-verdict">Incomplete and incompatible</p>
+        </div>
+        <div class="silo-card">
+          <div class="silo-header cursor-accent">Cursor</div>
+          <p class="silo-format">Local SQLite</p>
+          <p class="silo-verdict">Locked to local machine</p>
+        </div>
+        <div class="silo-card">
+          <div class="silo-header copilot-accent">Copilot</div>
+          <p class="silo-format">No export</p>
+          <p class="silo-verdict">Total lock-in</p>
+        </div>
+        <div class="silo-card">
+          <div class="silo-header grok-accent">Grok</div>
+          <p class="silo-format">Proprietary BSON</p>
+          <p class="silo-verdict">Incompatible with everything</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ===== SOLUTION ===== -->
+  <section class="section" id="solution" aria-labelledby="solution-heading">
+    <div class="container">
+      <div class="text-center max-w-prose mx-auto" data-reveal>
+        <p class="section-label">The Solution</p>
+        <h2 id="solution-heading">One universal, open standard</h2>
+        <p style="margin-top: var(--space-4);">OMP defines a simple JSON-based exchange format that any platform can export, any user can back up, and any system can import. No vendor lock-in. No data loss.</p>
+      </div>
+
+      <div class="features-grid" data-reveal>
+        <div class="neural-card feature-card">
+          <div class="icon-hex"><Icons name="format" size={26} /></div>
+          <h3>Universal Format</h3>
+          <p>Human-readable JSON. Flat, simple, self-contained. No nested DAGs or platform-specific artifacts. Just conversations and messages.</p>
+        </div>
+        <div class="neural-card feature-card">
+          <div class="icon-hex"><Icons name="connector" size={26} /></div>
+          <h3>Platform Connectors</h3>
+          <p>Drop-in converters for ChatGPT, Claude, Gemini, and more. Export from any platform, import to any other — automatically.</p>
+        </div>
+        <div class="neural-card feature-card">
+          <div class="icon-hex"><Icons name="shield" size={26} /></div>
+          <h3>Enterprise Grade</h3>
+          <p>RBAC, audit logging, HIPAA/GLBA/COPPA compliance profiles, multi-tenant isolation. Built for regulated environments.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ===== FIVE RIGHTS ===== -->
+  <section class="section" id="rights" aria-labelledby="rights-heading">
+    <div class="container">
+      <div class="text-center max-w-prose mx-auto" data-reveal>
+        <p class="section-label">Your Rights</p>
+        <h2 id="rights-heading">Five guaranteed operations</h2>
+        <p style="margin-top: var(--space-4);">OMP exists to guarantee these five non-negotiable operations for every user.</p>
+      </div>
+
+      <div class="rights-grid" data-reveal>
+        <div class="neural-card right-card">
+          <div class="icon-hex"><Icons name="backup" size={26} /></div>
+          <h3>Backup</h3>
+          <p>Create a complete, portable copy of your AI history as an .omp.zip archive.</p>
+        </div>
+        <div class="neural-card right-card">
+          <div class="icon-hex"><Icons name="sync" size={26} /></div>
+          <h3>Restore</h3>
+          <p>Import any OMP archive into any compatible Memory Host — your data, your choice.</p>
+        </div>
+        <div class="neural-card right-card">
+          <div class="icon-hex"><Icons name="connector" size={26} /></div>
+          <h3>Migrate</h3>
+          <p>Move from one platform to another. ChatGPT → Claude → Gemini. No context lost.</p>
+        </div>
+        <div class="neural-card right-card">
+          <div class="icon-hex"><Icons name="delete" size={26} /></div>
+          <h3>Delete</h3>
+          <p>Permanently remove specific conversations or your entire vault. Irrecoverable in 30 days.</p>
+        </div>
+        <div class="neural-card right-card">
+          <div class="icon-hex"><Icons name="search" size={26} /></div>
+          <h3>Search</h3>
+          <p>Find anything across all platforms — by keyword or meaning. Full semantic search.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ===== ECOSYSTEM ===== -->
+  <section class="section" id="ecosystem" aria-labelledby="ecosystem-heading">
+    <div class="container">
+      <div class="text-center max-w-prose mx-auto" data-reveal>
+        <p class="section-label">Ecosystem</p>
+        <h2 id="ecosystem-heading">Part of the open AI stack</h2>
+        <p style="margin-top: var(--space-4);">OMP complements — not competes with — other emerging AI standards.</p>
+      </div>
+
+      <div class="ecosystem-grid" data-reveal>
+        <div class="neural-card eco-card">
+          <h3>MCP <span class="eco-org">(Anthropic / LF)</span></h3>
+          <p>MCP connects AI to tools. OMP stores the resulting conversations. <strong>Complementary.</strong></p>
+        </div>
+        <div class="neural-card eco-card">
+          <h3>A2A <span class="eco-org">(Google / LF)</span></h3>
+          <p>A2A governs agent-to-agent communication. OMP stores what those agents discussed. <strong>Complementary.</strong></p>
+        </div>
+        <div class="neural-card eco-card">
+          <h3>OAuth 2.0 <span class="eco-org">(RFC 6749)</span></h3>
+          <p>OMP uses OAuth for authentication. It does not replace or redefine OAuth. <strong>Built on top.</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ===== FAQ (AEO) ===== -->
+  <section class="section" id="faq" aria-labelledby="faq-heading" itemscope itemtype="https://schema.org/FAQPage">
+    <div class="container">
+      <div class="text-center max-w-prose mx-auto" data-reveal>
+        <p class="section-label">FAQ</p>
+        <h2 id="faq-heading">Frequently asked questions</h2>
+      </div>
+
+      <div class="faq-list max-w-prose mx-auto" data-reveal>
+        <details class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <summary itemprop="name">What is the Open Memory Protocol?</summary>
+          <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p itemprop="text">The Open Memory Protocol (OMP) is an open standard that lets you backup, migrate, and own your AI conversations across every platform including ChatGPT, Claude, Gemini, Cursor, and more. Think of it as the iCloud of AI — your conversations are automatically backed up, searchable, and portable.</p>
+          </div>
+        </details>
+
+        <details class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <summary itemprop="name">Can I export my ChatGPT conversations to Claude?</summary>
+          <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p itemprop="text">Yes. OMP provides connectors that convert ChatGPT exports into the universal OMP format, which can then be imported into any OMP-compatible platform. The process is: Export from ChatGPT → Convert via OMP Connector → Import to Claude or any other platform.</p>
+          </div>
+        </details>
+
+        <details class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <summary itemprop="name">Is OMP free to use?</summary>
+          <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p itemprop="text">Yes. The OMP specification is published under CC BY 4.0 and all code (SDKs, connectors, reference server) is Apache 2.0 licensed. The standard itself is completely free. There is also a hosted cloud service (Memory Vault) with free and paid tiers for those who prefer a managed solution.</p>
+          </div>
+        </details>
+
+        <details class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <summary itemprop="name">How does OMP compare to MCP or A2A?</summary>
+          <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p itemprop="text">MCP (Model Context Protocol) connects AI to tools. A2A (Agent-to-Agent) governs communication between AI agents. OMP stores the resulting conversations from both. They are complementary standards — MCP and A2A handle the doing, OMP handles the remembering.</p>
+          </div>
+        </details>
+
+        <details class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <summary itemprop="name">Can I self-host my own Memory Vault?</summary>
+          <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p itemprop="text">Absolutely. OMP provides a reference server as a Docker template that you can pull and run with a single command: docker pull ghcr.io/open-memory-protocol/omp-server:latest. It supports local-first, self-hosted, cloud, and hybrid deployment models.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ===== CTA ===== -->
+  <section class="section cta-section" id="cta" aria-labelledby="cta-heading">
+    <div class="container text-center max-w-prose mx-auto" data-reveal>
+      <div class="cta-glow" aria-hidden="true"></div>
+      <div class="icon-hex mx-auto" style="margin-bottom: var(--space-6); width: 64px; height: 64px;">
+        <Icons name="graph" size={30} />
+      </div>
+      <h2 id="cta-heading" class="gradient-text">Hosted Memory Vault</h2>
+      <p style="color: var(--color-text-bright); font-size: 1.1rem; margin-top: var(--space-4); margin-bottom: var(--space-8);">
+        Upload your AI exports, explore your conversations in an interactive knowledge graph, and ask AI-powered questions about your entire history.
+      </p>
+      <div style="display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap;">
+        <a href="/vault" class="btn btn-primary" id="cta-vault">
+          Explore Memory Vault
+          <Icons name="arrow-right" size={16} />
+        </a>
+        <a href="/spec" class="btn btn-secondary" id="cta-read-spec">
+          Read the Specification
+        </a>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  /* ===== HERO ===== */
+  .hero {
+    padding: var(--space-20) 0 var(--space-16);
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-grid {
+    display: grid;
+    gap: var(--space-12);
+    align-items: center;
+  }
+
+  @media (min-width: 992px) {
+    .hero-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    background: rgba(var(--color-synapse-rgb), 0.06);
+    border: 1px solid rgba(var(--color-synapse-rgb), 0.15);
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    color: var(--color-synapse);
+    font-weight: 500;
+    margin-bottom: var(--space-6);
+  }
+
+  .pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-synapse);
+    animation: synapsePulse 2s infinite;
+  }
+
+  .hero h1 { margin-bottom: var(--space-6); }
+  .hero-subtitle {
+    font-size: 1.15rem;
+    color: var(--color-text);
+    margin-bottom: var(--space-8);
+    max-width: 520px;
+  }
+  .hero-subtitle strong { color: var(--color-text-bright); }
+
+  .hero-actions {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-10);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: var(--space-6);
+    align-items: center;
+  }
+
+  .stat-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--color-synapse);
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .stat-divider {
+    width: 1px;
+    height: 32px;
+    background: var(--color-surface-border);
+  }
+
+  /* ===== SYNAPSE VISUALIZATION ===== */
+  .synapse-diagram {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .s-node {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    z-index: 2;
+  }
+
+  .s-node span {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .node-ring {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid;
+    position: relative;
+  }
+
+  .node-ring::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 1px solid;
+    opacity: 0.3;
+    animation: synapsePulse 3s infinite;
+  }
+
+  .chatgpt .node-ring, .chatgpt .node-ring::after { border-color: var(--color-chatgpt); }
+  .claude .node-ring, .claude .node-ring::after { border-color: var(--color-claude); }
+  .gemini .node-ring, .gemini .node-ring::after { border-color: var(--color-gemini); }
+  .cursor .node-ring, .cursor .node-ring::after { border-color: var(--color-axon); }
+  .perplexity .node-ring, .perplexity .node-ring::after { border-color: var(--color-dendrite); }
+
+  .chatgpt .node-ring::after { animation-delay: 0.5s; }
+  .claude .node-ring::after { animation-delay: 1s; }
+  .gemini .node-ring::after { animation-delay: 1.5s; }
+  .cursor .node-ring::after { animation-delay: 0.8s; }
+  .perplexity .node-ring::after { animation-delay: 1.2s; }
+
+  .synapse-lines {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .syn-line {
+    stroke: url(#syn1);
+    stroke-width: 1;
+    stroke-dasharray: 6 4;
+    animation: dashFlow 3s linear infinite;
+  }
+
+  .syn-cross { stroke-width: 0.5; opacity: 0.3; }
+  .syn-1 { animation-delay: 0s; }
+  .syn-2 { animation-delay: 0.5s; }
+  .syn-3 { animation-delay: 1s; }
+  .syn-4 { animation-delay: 0.3s; }
+  .syn-5 { animation-delay: 0.8s; }
+
+  @keyframes dashFlow {
+    to { stroke-dashoffset: -20; }
+  }
+
+  /* Central Vault */
+  .vault-core {
+    z-index: 3;
+  }
+
+  .vault-glow {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(var(--color-synapse-rgb), 0.2) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: glowPulse 4s ease-in-out infinite;
+    z-index: -1;
+  }
+
+  .vault-inner {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-surface), var(--color-surface-hover));
+    border: 1.5px solid rgba(var(--color-synapse-rgb), 0.4);
+    border-radius: 14px;
+    color: var(--color-synapse);
+    box-shadow: 0 0 30px rgba(var(--color-synapse-rgb), 0.15);
+  }
+
+  .vault-core span {
+    font-size: 0.8rem;
+    color: var(--color-synapse);
+    font-weight: 700;
+  }
+
+  /* Floating particles */
+  .particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: rgba(var(--color-synapse-rgb), 0.6);
+    animation: synapseFloat 6s ease-in-out infinite;
+  }
+  .p1 { left: 30%; top: 30%; animation-delay: 0s; }
+  .p2 { left: 70%; top: 25%; animation-delay: 1s; }
+  .p3 { left: 20%; top: 60%; animation-delay: 2s; }
+  .p4 { left: 80%; top: 55%; animation-delay: 0.5s; }
+  .p5 { left: 45%; top: 40%; animation-delay: 1.5s; }
+  .p6 { left: 55%; top: 80%; animation-delay: 2.5s; }
+
+  /* ===== SILOS ===== */
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-synapse);
+    margin-bottom: var(--space-3);
+  }
+
+  .silo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+    margin-top: var(--space-12);
+  }
+
+  @media (min-width: 768px) {
+    .silo-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (min-width: 1024px) {
+    .silo-grid { grid-template-columns: repeat(6, 1fr); }
+  }
+
+  .silo-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-surface-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    text-align: center;
+  }
+
+  .silo-header {
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-bottom: var(--space-2);
+    padding-bottom: var(--space-2);
+    border-bottom: 2px solid;
+  }
+
+  .chatgpt-accent { border-color: var(--color-chatgpt); color: var(--color-chatgpt); }
+  .claude-accent { border-color: var(--color-claude); color: var(--color-claude); }
+  .gemini-accent { border-color: var(--color-gemini); color: var(--color-gemini); }
+  .cursor-accent { border-color: var(--color-axon); color: var(--color-axon); }
+  .copilot-accent { border-color: #9333ea; color: #9333ea; }
+  .grok-accent { border-color: var(--color-fire); color: var(--color-fire); }
+
+  .silo-format {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    margin-bottom: 4px;
+  }
+
+  .silo-verdict {
+    font-size: 0.7rem;
+    color: rgba(244, 114, 182, 0.8);
+    font-weight: 500;
+  }
+
+  /* ===== FEATURES ===== */
+  .features-grid {
+    display: grid;
+    gap: var(--space-6);
+    margin-top: var(--space-12);
+  }
+
+  @media (min-width: 768px) {
+    .features-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .feature-card h3 { margin-bottom: var(--space-3); }
+  .feature-card p { font-size: 0.9rem; }
+
+  /* ===== RIGHTS ===== */
+  .rights-grid {
+    display: grid;
+    gap: var(--space-6);
+    margin-top: var(--space-12);
+  }
+
+  @media (min-width: 768px) {
+    .rights-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (min-width: 1024px) {
+    .rights-grid { grid-template-columns: repeat(5, 1fr); }
+  }
+
+  .right-card { text-align: center; padding: var(--space-6); }
+  .right-card .icon-hex { margin: 0 auto var(--space-4); }
+  .right-card h3 { font-size: 1.1rem; margin-bottom: var(--space-2); }
+  .right-card p { font-size: 0.85rem; }
+
+  /* ===== ECOSYSTEM ===== */
+  .ecosystem-grid {
+    display: grid;
+    gap: var(--space-6);
+    margin-top: var(--space-12);
+  }
+
+  @media (min-width: 768px) {
+    .ecosystem-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .eco-card h3 { font-size: 1.1rem; margin-bottom: var(--space-3); }
+  .eco-org { color: var(--color-text-muted); font-weight: 400; font-size: 0.85rem; }
+
+  /* ===== FAQ ===== */
+  .faq-list {
+    margin-top: var(--space-12);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--color-surface-border);
+    padding: var(--space-5) 0;
+  }
+
+  .faq-item summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--color-text-bright);
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    transition: color var(--transition-fast);
+  }
+
+  .faq-item summary::-webkit-details-marker { display: none; }
+
+  .faq-item summary::after {
+    content: '+';
+    font-size: 1.25rem;
+    color: var(--color-synapse);
+    transition: transform var(--transition-fast);
+    font-weight: 300;
+  }
+
+  .faq-item[open] summary::after {
+    content: '−';
+  }
+
+  .faq-item summary:hover { color: var(--color-synapse); }
+
+  .faq-answer {
+    padding-top: var(--space-3);
+  }
+
+  .faq-answer p { font-size: 0.9rem; }
+
+  /* ===== CTA ===== */
+  .cta-section {
+    position: relative;
+    padding: var(--space-32) 0;
+  }
+
+  .cta-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(var(--color-synapse-rgb), 0.08) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: -1;
+  }
+</style>

@@ -1,0 +1,1238 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icons from '../components/Icons.astro';
+---
+
+<Layout
+  title="Memory Vault — Visualize & Query Your AI History"
+  description="Upload your AI exports, explore conversations as an interactive knowledge graph, and ask AI-powered questions about your entire history across ChatGPT, Claude, Gemini, and more."
+  canonical="https://openmemoryprotocol.com/vault"
+>
+
+  <!-- ===== VAULT HERO ===== -->
+  <section class="vault-hero" id="vault-hero">
+    <div class="container">
+      <div class="text-center max-w-prose mx-auto" data-reveal>
+        <p class="section-label">Memory Vault</p>
+        <h1>Your AI brain,<br /><span class="gradient-text">visualized.</span></h1>
+        <p class="vault-subtitle">
+          Upload your exports from any platform. See every conversation as an interactive knowledge graph.
+          Ask questions about your entire AI history with natural language.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== INTERACTIVE DEMO ===== -->
+  <section class="vault-demo-section" id="vault-demo">
+    <div class="container">
+      <div class="demo-chrome" data-reveal>
+        <!-- Window Chrome Bar -->
+        <div class="chrome-bar">
+          <div class="chrome-dots">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <div class="chrome-tabs">
+            <button class="chrome-tab active" data-tab="graph" id="tab-graph">
+              <Icons name="graph" size={14} />
+              Knowledge Graph
+            </button>
+            <button class="chrome-tab" data-tab="query" id="tab-query">
+              <Icons name="search" size={14} />
+              Ask Your Memory
+            </button>
+            <button class="chrome-tab" data-tab="timeline" id="tab-timeline">
+              <Icons name="sync" size={14} />
+              Timeline
+            </button>
+          </div>
+          <div class="chrome-stats">
+            <span class="chrome-stat">847 conversations</span>
+            <span class="chrome-stat">12,453 messages</span>
+          </div>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="demo-viewport">
+
+          <!-- ===== GRAPH TAB ===== -->
+          <div class="tab-panel active" id="panel-graph">
+            <div class="graph-layout">
+              <!-- Graph Canvas -->
+              <div class="graph-canvas-wrap">
+                <canvas id="vault-graph" width="800" height="500"></canvas>
+                <div class="graph-controls">
+                  <button class="graph-btn" id="graph-zoom-in" aria-label="Zoom in">+</button>
+                  <button class="graph-btn" id="graph-zoom-out" aria-label="Zoom out">−</button>
+                  <button class="graph-btn" id="graph-reset" aria-label="Reset view">⟲</button>
+                </div>
+                <div class="graph-legend">
+                  <span class="legend-item"><span class="legend-dot" style="background: #10b981;"></span> ChatGPT</span>
+                  <span class="legend-item"><span class="legend-dot" style="background: #d97757;"></span> Claude</span>
+                  <span class="legend-item"><span class="legend-dot" style="background: #4285f4;"></span> Gemini</span>
+                  <span class="legend-item"><span class="legend-dot" style="background: #818cf8;"></span> Cursor</span>
+                </div>
+              </div>
+
+              <!-- Node Detail Sidebar -->
+              <div class="graph-sidebar" id="graph-sidebar">
+                <div class="sidebar-placeholder" id="sidebar-placeholder">
+                  <div class="sidebar-icon">
+                    <Icons name="graph" size={32} />
+                  </div>
+                  <p>Click any node to view<br />conversation details</p>
+                </div>
+                <div class="sidebar-detail" id="sidebar-detail" style="display: none;">
+                  <div class="detail-header">
+                    <span class="detail-platform" id="detail-platform"></span>
+                    <span class="detail-date" id="detail-date"></span>
+                  </div>
+                  <h3 id="detail-title"></h3>
+                  <div class="detail-meta">
+                    <span id="detail-messages"></span>
+                    <span id="detail-tokens"></span>
+                  </div>
+                  <div class="detail-topics" id="detail-topics"></div>
+                  <div class="detail-preview" id="detail-preview"></div>
+                  <div class="detail-connections">
+                    <p class="detail-label">Related conversations</p>
+                    <div id="detail-related"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== QUERY TAB ===== -->
+          <div class="tab-panel" id="panel-query">
+            <div class="query-layout">
+              <div class="query-messages" id="query-messages">
+                <div class="query-welcome">
+                  <div class="welcome-icon">
+                    <Icons name="brain" size={40} />
+                  </div>
+                  <h3>Ask Your Memory</h3>
+                  <p>Query your entire AI conversation history using natural language. Your vault contains <strong>847 conversations</strong> across 4 platforms.</p>
+                  <div class="suggested-queries">
+                    <button class="suggestion" data-query="What databases have I discussed?">What databases have I discussed?</button>
+                    <button class="suggestion" data-query="Summarize my coding decisions from last month">Summarize my coding decisions</button>
+                    <button class="suggestion" data-query="What did I decide about authentication?">What did I decide about auth?</button>
+                    <button class="suggestion" data-query="Find conversations about deployment strategies">Deployment strategies</button>
+                  </div>
+                </div>
+              </div>
+              <div class="query-input-wrap">
+                <div class="query-input-bar">
+                  <input type="text" id="query-input" placeholder="Ask anything about your AI history..." autocomplete="off" />
+                  <button class="query-send" id="query-send" aria-label="Send query">
+                    <Icons name="arrow-right" size={18} />
+                  </button>
+                </div>
+                <p class="query-disclaimer">Powered by semantic search across your OMP vault • Results from ChatGPT, Claude, Gemini & Cursor</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== TIMELINE TAB ===== -->
+          <div class="tab-panel" id="panel-timeline">
+            <div class="timeline-layout">
+              <div class="timeline-track">
+                <div class="timeline-month">
+                  <h4>April 2026</h4>
+                  <div class="timeline-heatmap">
+                    <div class="heat-row">
+                      <span class="heat-cell h3" title="Apr 1: 12 conversations"></span>
+                      <span class="heat-cell h2" title="Apr 2: 8 conversations"></span>
+                      <span class="heat-cell h4" title="Apr 3: 18 conversations"></span>
+                      <span class="heat-cell h1" title="Apr 4: 3 conversations"></span>
+                      <span class="heat-cell h3" title="Apr 5: 11 conversations"></span>
+                      <span class="heat-cell h0" title="Apr 6: 0 conversations"></span>
+                      <span class="heat-cell h2" title="Apr 7: 7 conversations"></span>
+                    </div>
+                    <div class="heat-row">
+                      <span class="heat-cell h5" title="Apr 8: 24 conversations"></span>
+                      <span class="heat-cell h3" title="Apr 9: 14 conversations"></span>
+                      <span class="heat-cell h2" title="Apr 10: 6 conversations"></span>
+                      <span class="heat-cell h4" title="Apr 11: 19 conversations"></span>
+                      <span class="heat-cell h1" title="Apr 12: 2 conversations"></span>
+                      <span class="heat-cell h0" title="Apr 13: 0 conversations"></span>
+                      <span class="heat-cell h1" title="Apr 14: 4 conversations"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="timeline-month">
+                  <h4>March 2026</h4>
+                  <div class="timeline-heatmap">
+                    <div class="heat-row">
+                      <span class="heat-cell h2"></span><span class="heat-cell h3"></span><span class="heat-cell h1"></span>
+                      <span class="heat-cell h4"></span><span class="heat-cell h2"></span><span class="heat-cell h0"></span><span class="heat-cell h1"></span>
+                    </div>
+                    <div class="heat-row">
+                      <span class="heat-cell h3"></span><span class="heat-cell h5"></span><span class="heat-cell h2"></span>
+                      <span class="heat-cell h1"></span><span class="heat-cell h3"></span><span class="heat-cell h0"></span><span class="heat-cell h2"></span>
+                    </div>
+                    <div class="heat-row">
+                      <span class="heat-cell h1"></span><span class="heat-cell h2"></span><span class="heat-cell h4"></span>
+                      <span class="heat-cell h3"></span><span class="heat-cell h1"></span><span class="heat-cell h0"></span><span class="heat-cell h3"></span>
+                    </div>
+                    <div class="heat-row">
+                      <span class="heat-cell h4"></span><span class="heat-cell h2"></span><span class="heat-cell h3"></span>
+                      <span class="heat-cell h5"></span><span class="heat-cell h2"></span><span class="heat-cell h1"></span><span class="heat-cell h0"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="timeline-breakdown">
+                <h4>Platform Breakdown</h4>
+                <div class="breakdown-bars">
+                  <div class="bar-item">
+                    <span class="bar-label">ChatGPT</span>
+                    <div class="bar-track"><div class="bar-fill chatgpt-fill" style="width: 42%;"></div></div>
+                    <span class="bar-value">356</span>
+                  </div>
+                  <div class="bar-item">
+                    <span class="bar-label">Claude</span>
+                    <div class="bar-track"><div class="bar-fill claude-fill" style="width: 31%;"></div></div>
+                    <span class="bar-value">263</span>
+                  </div>
+                  <div class="bar-item">
+                    <span class="bar-label">Gemini</span>
+                    <div class="bar-track"><div class="bar-fill gemini-fill" style="width: 18%;"></div></div>
+                    <span class="bar-value">152</span>
+                  </div>
+                  <div class="bar-item">
+                    <span class="bar-label">Cursor</span>
+                    <div class="bar-track"><div class="bar-fill cursor-fill" style="width: 9%;"></div></div>
+                    <span class="bar-value">76</span>
+                  </div>
+                </div>
+                <div class="breakdown-summary">
+                  <div class="summary-stat">
+                    <span class="summary-value">847</span>
+                    <span class="summary-label">Total Conversations</span>
+                  </div>
+                  <div class="summary-stat">
+                    <span class="summary-value">12.4K</span>
+                    <span class="summary-label">Messages</span>
+                  </div>
+                  <div class="summary-stat">
+                    <span class="summary-value">2.1M</span>
+                    <span class="summary-label">Tokens</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="section" id="how-it-works">
+    <div class="container">
+      <div class="text-center max-w-prose mx-auto" data-reveal>
+        <p class="section-label">How It Works</p>
+        <h2>Three steps to total recall</h2>
+      </div>
+
+      <div class="steps-grid" data-reveal>
+        <div class="neural-card step-card">
+          <div class="step-number">1</div>
+          <div class="icon-hex"><Icons name="backup" size={26} /></div>
+          <h3>Upload Your Exports</h3>
+          <p>Drop in your ChatGPT ZIP, Claude JSON, Gemini Takeout, or any OMP archive. Our connectors handle the format conversion automatically.</p>
+        </div>
+        <div class="step-arrow" aria-hidden="true">→</div>
+        <div class="neural-card step-card">
+          <div class="step-number">2</div>
+          <div class="icon-hex"><Icons name="graph" size={26} /></div>
+          <h3>Explore the Graph</h3>
+          <p>Your conversations become an interactive knowledge graph. See topics cluster, trace decision paths, and discover connections you never knew existed.</p>
+        </div>
+        <div class="step-arrow" aria-hidden="true">→</div>
+        <div class="neural-card step-card">
+          <div class="step-number">3</div>
+          <div class="icon-hex"><Icons name="search" size={26} /></div>
+          <h3>Ask Questions</h3>
+          <p>Query your entire history in natural language. "What did I decide about the database schema?" — instant answers with source links.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="section cta-section" id="vault-cta">
+    <div class="container text-center max-w-prose mx-auto" data-reveal>
+      <div class="cta-glow" aria-hidden="true"></div>
+      <h2 class="gradient-text">Get Early Access</h2>
+      <p style="color: var(--color-text-bright); font-size: 1.1rem; margin-top: var(--space-4); margin-bottom: var(--space-8);">
+        Memory Vault is currently in private beta. Join the waitlist to be among the first to visualize your AI memory.
+      </p>
+      <div class="cta-email-form">
+        <input type="email" placeholder="you@example.com" class="cta-email-input" id="waitlist-email" />
+        <button class="btn btn-primary" id="waitlist-submit">
+          Join Waitlist
+          <Icons name="arrow-right" size={16} />
+        </button>
+      </div>
+      <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: var(--space-3);">
+        Or <a href="https://github.com/open-memory-protocol/open-memory-protocol" style="color: var(--color-synapse);">self-host the reference server</a> with Docker.
+      </p>
+    </div>
+  </section>
+
+</Layout>
+
+<script>
+// ============================================================
+// KNOWLEDGE GRAPH VISUALIZATION
+// ============================================================
+const MOCK_NODES = [
+  { id: 0, label: "Database Schema Design", platform: "chatgpt", x: 350, y: 200, r: 18, topics: ["PostgreSQL","Prisma","schema design"], messages: 34, date: "Apr 7, 2026", tokens: "18.2K", preview: "Discussed normalized vs denormalized schemas for the multi-tenant platform. Decided on PostgreSQL with Prisma ORM..." },
+  { id: 1, label: "Auth System Architecture", platform: "claude", x: 200, y: 130, r: 15, topics: ["NextAuth","JWT","OAuth"], messages: 28, date: "Apr 5, 2026", tokens: "14.8K", preview: "Evaluated NextAuth vs custom JWT. Chose NextAuth with Google + GitHub providers. Added email verification flow..." },
+  { id: 2, label: "React Component Patterns", platform: "chatgpt", x: 500, y: 150, r: 14, topics: ["React","hooks","patterns"], messages: 22, date: "Apr 3, 2026", tokens: "11.3K", preview: "Explored compound components, render props, and custom hooks for the dashboard layout. Settled on a provider pattern..." },
+  { id: 3, label: "Docker Deployment", platform: "gemini", x: 150, y: 300, r: 12, topics: ["Docker","CI/CD","nginx"], messages: 19, date: "Apr 1, 2026", tokens: "9.7K", preview: "Set up multi-stage Docker build with nginx reverse proxy. Configured GitHub Actions for auto-deploy to Railway..." },
+  { id: 4, label: "Graph Visualization", platform: "claude", x: 450, y: 320, r: 16, topics: ["D3.js","Canvas","force-directed"], messages: 31, date: "Mar 31, 2026", tokens: "16.1K", preview: "Prototyped force-directed graph layout for conversation visualization. Compared D3.js vs raw Canvas API..." },
+  { id: 5, label: "API Rate Limiting", platform: "chatgpt", x: 600, y: 250, r: 11, topics: ["Express","middleware","Redis"], messages: 15, date: "Mar 28, 2026", tokens: "7.5K", preview: "Implemented token bucket rate limiter with Redis backend. Set different tiers for free vs paid users..." },
+  { id: 6, label: "Landing Page Design", platform: "cursor", x: 300, y: 380, r: 13, topics: ["Astro","CSS","animations"], messages: 26, date: "Mar 25, 2026", tokens: "13.4K", preview: "Built the neural synapse theme with animated canvas background. Implemented glass morphism cards and scroll reveals..." },
+  { id: 7, label: "Testing Strategy", platform: "claude", x: 550, y: 400, r: 10, topics: ["Vitest","Playwright","TDD"], messages: 12, date: "Mar 22, 2026", tokens: "6.1K", preview: "Set up Vitest for unit tests, Playwright for E2E. Agreed on 80% coverage target for core modules..." },
+  { id: 8, label: "Data Migration Plan", platform: "gemini", x: 100, y: 200, r: 14, topics: ["migration","ETL","backup"], messages: 24, date: "Mar 19, 2026", tokens: "12.8K", preview: "Designed the ETL pipeline for converting legacy platform exports to OMP format. Built connector architecture..." },
+  { id: 9, label: "Performance Optimization", platform: "chatgpt", x: 680, y: 350, r: 12, topics: ["lazy loading","caching","CDN"], messages: 18, date: "Mar 15, 2026", tokens: "9.2K", preview: "Analyzed Lighthouse scores. Implemented code splitting, image optimization, and edge caching with Cloudflare..." },
+  { id: 10, label: "TypeScript Patterns", platform: "claude", x: 250, y: 450, r: 11, topics: ["TypeScript","generics","utility types"], messages: 16, date: "Mar 12, 2026", tokens: "8.3K", preview: "Deep dive into conditional types and mapped types for the SDK. Created strict type-safe API client..." },
+  { id: 11, label: "Mobile Responsive Layout", platform: "cursor", x: 420, y: 460, r: 10, topics: ["responsive","mobile","CSS Grid"], messages: 14, date: "Mar 10, 2026", tokens: "7.1K", preview: "Reworked the entire layout grid for mobile breakpoints. Added hamburger nav, touch-friendly controls..." },
+];
+
+const MOCK_EDGES = [
+  [0, 1], [0, 3], [0, 8], [1, 2], [1, 5], [2, 4], [2, 6],
+  [3, 8], [3, 6], [4, 7], [4, 9], [5, 9], [6, 11], [7, 10],
+  [8, 10], [9, 11], [0, 4], [1, 8], [2, 7], [5, 7],
+];
+
+const PLATFORM_COLORS = {
+  chatgpt: '#10b981',
+  claude: '#d97757',
+  gemini: '#4285f4',
+  cursor: '#818cf8',
+};
+
+const MOCK_RESPONSES = {
+  "What databases have I discussed?": {
+    text: "Based on your conversation history, you've discussed databases extensively across **3 platforms**:\n\n**PostgreSQL** — Your primary choice. In your Apr 7 conversation with ChatGPT, you decided on PostgreSQL with Prisma ORM for the multi-tenant platform, choosing a normalized schema with tenant isolation via Row-Level Security.\n\n**Redis** — Used as a caching layer and rate-limiter backend (Mar 28, ChatGPT). You implemented a token bucket algorithm with per-user rate limits.\n\n**SQLite** — Mentioned in the context of Cursor's local storage format during your data migration planning (Mar 19, Gemini).",
+    sources: ["Database Schema Design", "API Rate Limiting", "Data Migration Plan"]
+  },
+  "Summarize my coding decisions from last month": {
+    text: "Here are your key technical decisions from March 2026:\n\n**Architecture**: Chose NextAuth over custom JWT for authentication, with Google + GitHub OAuth providers.\n\n**Frontend**: Adopted compound component patterns in React with a provider-based state management approach. Selected Astro for the marketing site.\n\n**Testing**: Settled on Vitest + Playwright stack with an 80% coverage target for core modules.\n\n**DevOps**: Multi-stage Docker builds with nginx reverse proxy, deployed via GitHub Actions to Railway.\n\n**Performance**: Implemented code splitting, lazy loading, and Cloudflare edge caching to achieve 95+ Lighthouse scores.",
+    sources: ["Auth System Architecture", "React Component Patterns", "Testing Strategy", "Docker Deployment", "Performance Optimization"]
+  },
+  "What did I decide about authentication?": {
+    text: "In your Apr 5 conversation with Claude, you made these authentication decisions:\n\n**Provider**: NextAuth (now Auth.js) over custom JWT implementation. The deciding factors were built-in CSRF protection, session management, and the adapter ecosystem.\n\n**OAuth Providers**: Google + GitHub for social login, with email/password as fallback.\n\n**Email Verification**: Implemented a token-based email verification flow with 24-hour expiry.\n\n**Session Strategy**: JWT-based sessions (not database sessions) for better scalability, with a 30-day refresh token rotation.\n\n**Authorization**: Role-based access control (RBAC) with three roles: user, admin, super_admin.",
+    sources: ["Auth System Architecture"]
+  },
+  "Find conversations about deployment strategies": {
+    text: "You have **3 conversations** related to deployment:\n\n**Docker Deployment** (Apr 1, Gemini) — Set up multi-stage Docker builds. Chose nginx as reverse proxy. Configured GitHub Actions CI/CD pipeline for auto-deploy to Railway on merge to main.\n\n**Performance Optimization** (Mar 15, ChatGPT) — Implemented Cloudflare CDN for static assets. Configured edge caching rules and cache invalidation on deploy.\n\n**Landing Page Design** (Mar 25, Cursor) — Deployed the Astro site as a static build to Vercel with automatic preview deployments for PRs.\n\nYour preferred deployment stack appears to be: **Docker → GitHub Actions → Railway** for backend, **Vercel** for frontend.",
+    sources: ["Docker Deployment", "Performance Optimization", "Landing Page Design"]
+  }
+};
+
+// --- Canvas Graph Rendering ---
+function initGraph() {
+  const canvas = document.getElementById('vault-graph');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+
+  function resize() {
+    const rect = canvas.parentElement.getBoundingClientRect();
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    canvas.style.width = rect.width + 'px';
+    canvas.style.height = rect.height + 'px';
+    ctx.scale(dpr, dpr);
+
+    // Scale nodes to fit canvas
+    const scaleX = rect.width / 800;
+    const scaleY = rect.height / 500;
+    MOCK_NODES.forEach(n => {
+      n.dx = n.x * scaleX;
+      n.dy = n.y * scaleY;
+      n.dr = n.r * Math.min(scaleX, scaleY);
+    });
+  }
+
+  resize();
+  window.addEventListener('resize', () => { resize(); });
+
+  let hovered = null;
+  let selected = null;
+  let animFrame = 0;
+
+  function draw() {
+    animFrame++;
+    const w = canvas.width / dpr;
+    const h = canvas.height / dpr;
+    ctx.clearRect(0, 0, w, h);
+
+    // Draw edges
+    MOCK_EDGES.forEach(([a, b]) => {
+      const na = MOCK_NODES[a];
+      const nb = MOCK_NODES[b];
+      const isActive = selected !== null && (a === selected || b === selected);
+      ctx.beginPath();
+      ctx.moveTo(na.dx, na.dy);
+      ctx.lineTo(nb.dx, nb.dy);
+      ctx.strokeStyle = isActive
+        ? 'rgba(0, 212, 255, 0.4)'
+        : 'rgba(0, 212, 255, 0.08)';
+      ctx.lineWidth = isActive ? 1.5 : 0.5;
+      ctx.stroke();
+
+      // Animated particle along active edges
+      if (isActive) {
+        const t = ((animFrame * 0.008) % 1);
+        const px = na.dx + (nb.dx - na.dx) * t;
+        const py = na.dy + (nb.dy - na.dy) * t;
+        ctx.beginPath();
+        ctx.arc(px, py, 2, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(0, 212, 255, 0.7)';
+        ctx.fill();
+      }
+    });
+
+    // Draw nodes
+    MOCK_NODES.forEach((node, i) => {
+      const isHovered = hovered === i;
+      const isSelected = selected === i;
+      const isConnected = selected !== null && MOCK_EDGES.some(([a, b]) => (a === selected && b === i) || (b === selected && a === i));
+      const color = PLATFORM_COLORS[node.platform];
+      const r = node.dr;
+
+      // Glow
+      if (isSelected || isHovered) {
+        ctx.beginPath();
+        ctx.arc(node.dx, node.dy, r + 12, 0, Math.PI * 2);
+        const glow = ctx.createRadialGradient(node.dx, node.dy, r, node.dx, node.dy, r + 12);
+        glow.addColorStop(0, color + '40');
+        glow.addColorStop(1, 'transparent');
+        ctx.fillStyle = glow;
+        ctx.fill();
+      }
+
+      // Node circle
+      ctx.beginPath();
+      ctx.arc(node.dx, node.dy, r, 0, Math.PI * 2);
+      const dimmed = selected !== null && !isSelected && !isConnected;
+      ctx.fillStyle = dimmed ? color + '20' : color + '30';
+      ctx.fill();
+      ctx.strokeStyle = dimmed ? color + '30' : color;
+      ctx.lineWidth = isSelected ? 2.5 : 1.5;
+      ctx.stroke();
+
+      // Pulse ring for selected
+      if (isSelected) {
+        const pulse = Math.sin(animFrame * 0.05) * 0.3 + 0.7;
+        ctx.beginPath();
+        ctx.arc(node.dx, node.dy, r + 6, 0, Math.PI * 2);
+        ctx.strokeStyle = color + Math.round(pulse * 80).toString(16).padStart(2, '0');
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+
+      // Label
+      if (isHovered || isSelected || r > 13) {
+        ctx.font = `${isSelected ? '600' : '500'} 11px 'Inter', sans-serif`;
+        ctx.fillStyle = dimmed ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.85)';
+        ctx.textAlign = 'center';
+        ctx.fillText(node.label, node.dx, node.dy + r + 16);
+      }
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+
+  // Hit detection
+  canvas.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    let found = null;
+    MOCK_NODES.forEach((n, i) => {
+      const dist = Math.hypot(mx - n.dx, my - n.dy);
+      if (dist < n.dr + 4) found = i;
+    });
+    hovered = found;
+    canvas.style.cursor = found !== null ? 'pointer' : 'default';
+  });
+
+  canvas.addEventListener('click', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    let found = null;
+    MOCK_NODES.forEach((n, i) => {
+      const dist = Math.hypot(mx - n.dx, my - n.dy);
+      if (dist < n.dr + 4) found = i;
+    });
+    if (found !== null) {
+      selected = found;
+      showNodeDetail(MOCK_NODES[found]);
+    } else {
+      selected = null;
+      hideNodeDetail();
+    }
+  });
+}
+
+function showNodeDetail(node) {
+  document.getElementById('sidebar-placeholder').style.display = 'none';
+  const detail = document.getElementById('sidebar-detail');
+  detail.style.display = 'block';
+
+  const color = PLATFORM_COLORS[node.platform];
+  document.getElementById('detail-platform').textContent = node.platform.charAt(0).toUpperCase() + node.platform.slice(1);
+  document.getElementById('detail-platform').style.color = color;
+  document.getElementById('detail-date').textContent = node.date;
+  document.getElementById('detail-title').textContent = node.label;
+  document.getElementById('detail-messages').textContent = node.messages + ' messages';
+  document.getElementById('detail-tokens').textContent = node.tokens + ' tokens';
+  document.getElementById('detail-preview').textContent = node.preview;
+
+  const topicsEl = document.getElementById('detail-topics');
+  topicsEl.innerHTML = node.topics.map(t => `<span class="topic-tag">${t}</span>`).join('');
+
+  const related = MOCK_EDGES
+    .filter(([a, b]) => a === node.id || b === node.id)
+    .map(([a, b]) => MOCK_NODES[a === node.id ? b : a])
+    .slice(0, 3);
+
+  const relatedEl = document.getElementById('detail-related');
+  relatedEl.innerHTML = related.map(r => `
+    <div class="related-item">
+      <span class="related-dot" style="background: ${PLATFORM_COLORS[r.platform]}"></span>
+      ${r.label}
+    </div>
+  `).join('');
+}
+
+function hideNodeDetail() {
+  document.getElementById('sidebar-placeholder').style.display = 'flex';
+  document.getElementById('sidebar-detail').style.display = 'none';
+}
+
+// ============================================================
+// QUERY INTERFACE
+// ============================================================
+function initQuery() {
+  const input = document.getElementById('query-input');
+  const sendBtn = document.getElementById('query-send');
+  const messagesEl = document.getElementById('query-messages');
+
+  function submitQuery(query) {
+    if (!query.trim()) return;
+
+    // Hide welcome
+    const welcome = messagesEl.querySelector('.query-welcome');
+    if (welcome) welcome.style.display = 'none';
+
+    // Add user message
+    const userMsg = document.createElement('div');
+    userMsg.className = 'chat-message user-message';
+    userMsg.innerHTML = `<div class="msg-content">${escapeHtml(query)}</div>`;
+    messagesEl.appendChild(userMsg);
+
+    // Loading state
+    const loading = document.createElement('div');
+    loading.className = 'chat-message ai-message loading';
+    loading.innerHTML = `<div class="msg-content"><span class="typing-dots"><span></span><span></span><span></span></span></div>`;
+    messagesEl.appendChild(loading);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+
+    // Find matching response
+    const matchKey = Object.keys(MOCK_RESPONSES).find(k =>
+      query.toLowerCase().includes(k.toLowerCase().slice(0, 20)) ||
+      k.toLowerCase().includes(query.toLowerCase().slice(0, 20))
+    );
+
+    const response = matchKey ? MOCK_RESPONSES[matchKey] : {
+      text: `I found **12 relevant conversations** across your vault matching "${query}".\n\nThe most relevant discussion was in your ChatGPT conversation "Database Schema Design" from April 7, where you explored this topic in depth. Related threads appear in your Claude and Gemini histories as well.\n\nWould you like me to show the specific messages, or summarize the key decisions?`,
+      sources: ["Database Schema Design", "Auth System Architecture"]
+    };
+
+    setTimeout(() => {
+      loading.remove();
+      const aiMsg = document.createElement('div');
+      aiMsg.className = 'chat-message ai-message';
+      aiMsg.innerHTML = `
+        <div class="msg-content">${formatMarkdown(response.text)}</div>
+        <div class="msg-sources">
+          <span class="sources-label">Sources:</span>
+          ${response.sources.map(s => `<span class="source-tag">${s}</span>`).join('')}
+        </div>
+      `;
+      messagesEl.appendChild(aiMsg);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }, 1200 + Math.random() * 800);
+
+    input.value = '';
+  }
+
+  sendBtn.addEventListener('click', () => submitQuery(input.value));
+  input.addEventListener('keydown', (e) => { if (e.key === 'Enter') submitQuery(input.value); });
+
+  document.querySelectorAll('.suggestion').forEach(btn => {
+    btn.addEventListener('click', () => submitQuery(btn.dataset.query));
+  });
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function formatMarkdown(text) {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n\n/g, '</p><p>')
+    .replace(/\n/g, '<br>')
+    .replace(/^/, '<p>')
+    .replace(/$/, '</p>');
+}
+
+// ============================================================
+// TAB SWITCHING
+// ============================================================
+function initTabs() {
+  document.querySelectorAll('.chrome-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.chrome-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
+    });
+  });
+}
+
+// ============================================================
+// INIT
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+  initGraph();
+  initQuery();
+  initTabs();
+});
+</script>
+
+<style is:global>
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-synapse);
+    margin-bottom: var(--space-3);
+  }
+
+  /* ===== VAULT HERO ===== */
+  .vault-hero {
+    padding: var(--space-20) 0 var(--space-10);
+  }
+
+  .vault-hero h1 { margin-bottom: var(--space-4); }
+
+  .vault-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text);
+    max-width: 580px;
+    margin: 0 auto;
+  }
+
+  /* ===== DEMO CHROME ===== */
+  .demo-chrome {
+    border: 1px solid var(--color-surface-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--color-surface);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(var(--color-synapse-rgb), 0.05);
+  }
+
+  .chrome-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: 10px var(--space-4);
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid var(--color-surface-border);
+  }
+
+  .chrome-dots {
+    display: flex;
+    gap: 6px;
+    padding-right: var(--space-3);
+  }
+
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot.red { background: #ff5f57; }
+  .dot.yellow { background: #ffbd2e; }
+  .dot.green { background: #28c840; }
+
+  .chrome-tabs {
+    display: flex;
+    gap: 2px;
+    flex: 1;
+  }
+
+  .chrome-tab {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border: none;
+    background: transparent;
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-family: inherit;
+  }
+
+  .chrome-tab:hover { color: var(--color-text-bright); background: rgba(255,255,255,0.04); }
+  .chrome-tab.active {
+    color: var(--color-synapse);
+    background: rgba(var(--color-synapse-rgb), 0.08);
+  }
+
+  .chrome-stats {
+    display: none;
+    gap: var(--space-3);
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+  }
+
+  @media (min-width: 768px) {
+    .chrome-stats { display: flex; }
+  }
+
+  .chrome-stat {
+    padding: 3px 8px;
+    background: rgba(var(--color-synapse-rgb), 0.06);
+    border-radius: 4px;
+    color: var(--color-synapse);
+  }
+
+  /* ===== VIEWPORT ===== */
+  .demo-viewport { min-height: 500px; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ===== GRAPH TAB ===== */
+  .graph-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    min-height: 500px;
+  }
+
+  @media (min-width: 768px) {
+    .graph-layout { grid-template-columns: 1fr 280px; }
+  }
+
+  .graph-canvas-wrap {
+    position: relative;
+    min-height: 400px;
+  }
+
+  #vault-graph {
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+  }
+
+  .graph-controls {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    gap: 4px;
+  }
+
+  .graph-btn {
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--color-surface-border);
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.5);
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+  }
+
+  .graph-btn:hover { color: var(--color-synapse); border-color: rgba(var(--color-synapse-rgb), 0.3); }
+
+  .graph-legend {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    display: flex;
+    gap: var(--space-3);
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+  }
+
+  .legend-item { display: flex; align-items: center; gap: 4px; }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  /* Graph Sidebar */
+  .graph-sidebar {
+    border-left: 1px solid var(--color-surface-border);
+    padding: var(--space-4);
+    overflow-y: auto;
+    max-height: 500px;
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .graph-sidebar { display: block; }
+  }
+
+  .sidebar-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: var(--space-3);
+    color: var(--color-text-muted);
+    text-align: center;
+    font-size: 0.85rem;
+  }
+
+  .sidebar-icon { color: rgba(var(--color-synapse-rgb), 0.2); }
+
+  .detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-2);
+  }
+
+  .detail-platform {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .detail-date {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+  }
+
+  .sidebar-detail h3 {
+    font-size: 1rem;
+    margin-bottom: var(--space-3);
+  }
+
+  .detail-meta {
+    display: flex;
+    gap: var(--space-3);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-3);
+  }
+
+  .detail-topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: var(--space-4);
+  }
+
+  .topic-tag {
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    background: rgba(var(--color-synapse-rgb), 0.08);
+    border: 1px solid rgba(var(--color-synapse-rgb), 0.12);
+    border-radius: 4px;
+    color: var(--color-synapse);
+  }
+
+  .detail-preview {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    padding: var(--space-3);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    margin-bottom: var(--space-4);
+  }
+
+  .detail-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-2);
+  }
+
+  .related-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    color: var(--color-text);
+    padding: 4px 0;
+  }
+
+  .related-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ===== QUERY TAB ===== */
+  .query-layout {
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+  }
+
+  .query-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-6);
+  }
+
+  .query-welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    gap: var(--space-3);
+  }
+
+  .welcome-icon { color: rgba(var(--color-synapse-rgb), 0.3); }
+  .query-welcome h3 { color: var(--color-text-bright); }
+  .query-welcome p { color: var(--color-text-muted); font-size: 0.9rem; max-width: 400px; }
+
+  .suggested-queries {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-top: var(--space-3);
+  }
+
+  .suggestion {
+    padding: 6px 14px;
+    border: 1px solid var(--color-surface-border);
+    border-radius: 9999px;
+    background: transparent;
+    color: var(--color-text);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-family: inherit;
+  }
+
+  .suggestion:hover {
+    border-color: var(--color-synapse);
+    color: var(--color-synapse);
+    background: rgba(var(--color-synapse-rgb), 0.06);
+  }
+
+  .query-input-wrap {
+    padding: var(--space-4);
+    border-top: 1px solid var(--color-surface-border);
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .query-input-bar {
+    display: flex;
+    gap: 8px;
+  }
+
+  #query-input {
+    flex: 1;
+    padding: 10px 16px;
+    border: 1px solid var(--color-surface-border);
+    border-radius: 9999px;
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--color-text-bright);
+    font-size: 0.9rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color var(--transition-fast);
+  }
+
+  #query-input:focus { border-color: rgba(var(--color-synapse-rgb), 0.4); }
+  #query-input::placeholder { color: var(--color-text-muted); }
+
+  .query-send {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: var(--color-synapse);
+    color: var(--color-base);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity var(--transition-fast);
+  }
+
+  .query-send:hover { opacity: 0.8; }
+
+  .query-disclaimer {
+    font-size: 0.65rem;
+    color: var(--color-text-muted);
+    text-align: center;
+    margin-top: 6px;
+  }
+
+  /* Chat Messages */
+  .chat-message {
+    margin-bottom: var(--space-4);
+    max-width: 85%;
+  }
+
+  .user-message {
+    margin-left: auto;
+  }
+
+  .user-message .msg-content {
+    background: rgba(var(--color-synapse-rgb), 0.12);
+    border: 1px solid rgba(var(--color-synapse-rgb), 0.15);
+    border-radius: 16px 16px 4px 16px;
+    padding: 10px 16px;
+    color: var(--color-text-bright);
+    font-size: 0.9rem;
+  }
+
+  .ai-message .msg-content {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--color-surface-border);
+    border-radius: 16px 16px 16px 4px;
+    padding: 12px 16px;
+    color: var(--color-text);
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .ai-message .msg-content p { margin-bottom: 0.5em; }
+  .ai-message .msg-content p:last-child { margin-bottom: 0; }
+  .ai-message .msg-content strong { color: var(--color-text-bright); }
+
+  .msg-sources {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+    margin-top: 6px;
+    padding-left: 4px;
+  }
+
+  .sources-label {
+    font-size: 0.65rem;
+    color: var(--color-text-muted);
+    margin-right: 4px;
+  }
+
+  .source-tag {
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: rgba(var(--color-synapse-rgb), 0.06);
+    border: 1px solid rgba(var(--color-synapse-rgb), 0.1);
+    color: var(--color-synapse);
+  }
+
+  .typing-dots {
+    display: flex;
+    gap: 4px;
+    padding: 4px 0;
+  }
+
+  .typing-dots span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-text-muted);
+    animation: typeBounce 1.4s infinite;
+  }
+
+  .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes typeBounce {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-6px); }
+  }
+
+  /* ===== TIMELINE TAB ===== */
+  .timeline-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    padding: var(--space-6);
+  }
+
+  @media (min-width: 768px) {
+    .timeline-layout { grid-template-columns: 1fr 260px; }
+  }
+
+  .timeline-track { display: flex; flex-direction: column; gap: var(--space-6); }
+  .timeline-month h4 { font-size: 0.85rem; color: var(--color-text-bright); margin-bottom: var(--space-2); }
+
+  .timeline-heatmap { display: flex; flex-direction: column; gap: 3px; }
+  .heat-row { display: flex; gap: 3px; }
+  .heat-cell {
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform var(--transition-fast);
+  }
+  .heat-cell:hover { transform: scale(1.2); }
+  .h0 { background: rgba(var(--color-synapse-rgb), 0.03); }
+  .h1 { background: rgba(var(--color-synapse-rgb), 0.1); }
+  .h2 { background: rgba(var(--color-synapse-rgb), 0.2); }
+  .h3 { background: rgba(var(--color-synapse-rgb), 0.35); }
+  .h4 { background: rgba(var(--color-synapse-rgb), 0.5); }
+  .h5 { background: rgba(var(--color-synapse-rgb), 0.7); }
+
+  .breakdown-bars { display: flex; flex-direction: column; gap: var(--space-3); }
+
+  .bar-item {
+    display: grid;
+    grid-template-columns: 70px 1fr 40px;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .bar-label { font-size: 0.75rem; color: var(--color-text-muted); }
+  .bar-track {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .bar-fill { height: 100%; border-radius: 4px; transition: width 1s ease; }
+  .chatgpt-fill { background: #10b981; }
+  .claude-fill { background: #d97757; }
+  .gemini-fill { background: #4285f4; }
+  .cursor-fill { background: #818cf8; }
+
+  .bar-value { font-size: 0.75rem; color: var(--color-text-bright); text-align: right; }
+
+  .breakdown-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-surface-border);
+  }
+
+  .summary-stat { text-align: center; }
+  .summary-value { display: block; font-size: 1.25rem; font-weight: 800; color: var(--color-synapse); }
+  .summary-label { font-size: 0.65rem; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .timeline-breakdown h4 {
+    font-size: 0.85rem;
+    color: var(--color-text-bright);
+    margin-bottom: var(--space-4);
+  }
+
+  /* ===== STEPS ===== */
+  .steps-grid {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-top: var(--space-12);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .step-card {
+    flex: 1;
+    min-width: 220px;
+    max-width: 320px;
+    text-align: center;
+    padding: var(--space-8) var(--space-5);
+    position: relative;
+  }
+
+  .step-number {
+    position: absolute;
+    top: 12px;
+    left: 16px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: rgba(var(--color-synapse-rgb), 0.3);
+  }
+
+  .step-card .icon-hex { margin: 0 auto var(--space-4); }
+  .step-card h3 { margin-bottom: var(--space-2); font-size: 1.05rem; }
+  .step-card p { font-size: 0.85rem; }
+
+  .step-arrow {
+    color: rgba(var(--color-synapse-rgb), 0.2);
+    font-size: 1.5rem;
+    font-weight: 200;
+  }
+
+  @media (max-width: 767px) {
+    .step-arrow { display: none; }
+  }
+
+  /* ===== CTA ===== */
+  .cta-section {
+    position: relative;
+    padding: var(--space-20) 0;
+  }
+
+  .cta-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(var(--color-synapse-rgb), 0.08) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .cta-email-form {
+    display: flex;
+    gap: 8px;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  .cta-email-input {
+    flex: 1;
+    padding: 12px 20px;
+    border: 1px solid var(--color-surface-border);
+    border-radius: 9999px;
+    background: var(--color-surface);
+    color: var(--color-text-bright);
+    font-size: 0.9rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color var(--transition-fast);
+  }
+
+  .cta-email-input:focus { border-color: rgba(var(--color-synapse-rgb), 0.4); }
+  .cta-email-input::placeholder { color: var(--color-text-muted); }
+</style>
+</Layout>

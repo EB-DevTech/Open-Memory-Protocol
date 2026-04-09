@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://openmemoryprotocol.com/schemas/v2.0/manifest.json",
+  "title": "OMP Archive Manifest",
+  "type": "object",
+  "properties": {
+    "omp_version": { "type": "string" },
+    "export_timestamp": { "type": "string", "format": "date-time" },
+    "user_id": { "type": "string" },
+    "source_platform": { "type": "string" },
+    "counts": {
+      "type": "object",
+      "properties": {
+        "conversations": { "type": "integer" },
+        "messages": { "type": "integer" },
+        "memories": { "type": "integer" },
+        "attachments": { "type": "integer" }
+      },
+      "required": ["conversations", "messages"]
+    },
+    "date_range": {
+      "type": "object",
+      "properties": {
+        "earliest": { "type": "string", "format": "date-time" },
+        "latest": { "type": "string", "format": "date-time" }
+      }
+    },
+    "platforms_included": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "checksum": { "type": "string" }
+  },
+  "required": ["omp_version", "export_timestamp", "source_platform", "counts", "checksum"]
+}
