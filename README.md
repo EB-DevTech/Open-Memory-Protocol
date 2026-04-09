@@ -1,4 +1,4 @@
-<![CDATA[<div align="center">
+<div align="center">
 
 # 🧠 Open Memory Protocol (OMP)
 
@@ -188,4 +188,4 @@ OMP is maintained by an open Working Group with no single-vendor veto. Changes f
 [⭐ Star this repo](https://github.com/open-memory-protocol/open-memory-protocol) · [Read the Spec](./spec/omp-v2.0.md) · [Join the Discussion](https://github.com/open-memory-protocol/open-memory-protocol/discussions)
 
 </div>
-]]>
+
