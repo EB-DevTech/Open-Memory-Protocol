@@ -11,6 +11,8 @@
 
 **A universal, vendor-neutral standard for owning, backing up, and moving your AI conversations across every platform.**
 
+Created by **[EB DevTech](https://ebdevtech.com)** · An open standard for everyone
+
 [Read the Spec](./spec/omp-v2.0.md) · [Website](https://openmemoryprotocol.com) · [Connectors](#connectors) · [Contributing](./CONTRIBUTING.md)
 
 </div>
@@ -160,7 +162,7 @@ open-memory-protocol/
 
 ## Hosted Solution
 
-Don't want to self-host? **[Memory Vault](https://openmemoryprotocol.org/vault)** is a cloud-hosted Memory Host that stores your conversations, visualizes them as an interactive knowledge graph, and lets you ask AI-powered questions about your history.
+Don't want to self-host? **[Memory Vault](https://openmemoryprotocol.com/vault)** is a cloud-hosted Memory Host that stores your conversations, visualizes them as an interactive knowledge graph, and lets you ask AI-powered questions about your history.
 
 ## Contributing
 
@@ -174,6 +176,13 @@ We welcome contributions from everyone! See our [Contributing Guide](./CONTRIBUT
 
 OMP is maintained by an open Working Group with no single-vendor veto. Changes follow the OEP (OMP Enhancement Proposal) process with a 30-day public comment period. See [Governance](./spec/omp-v2.0.md#15-governance) for details.
 
+## Founded By
+
+OMP was created and is maintained by **[EB DevTech](https://ebdevtech.com)**, a software development company building tools for AI-first workflows. We believe your AI conversations are your data — and you should own them.
+
+- 🌐 [ebdevtech.com](https://ebdevtech.com) — Custom AI solutions, enterprise consulting & development
+- 💼 [Hire us](https://ebdevtech.com/contact) for OMP integrations and AI-powered products
+
 ## License
 
 - **Specification**: [Creative Commons Attribution 4.0 International (CC BY 4.0)](./LICENSE-SPEC.md)
@@ -185,7 +194,9 @@ OMP is maintained by an open Working Group with no single-vendor veto. Changes f
 
 **Your AI conversations belong to you.**
 
-[⭐ Star this repo](https://github.com/open-memory-protocol/open-memory-protocol) · [Read the Spec](./spec/omp-v2.0.md) · [Join the Discussion](https://github.com/open-memory-protocol/open-memory-protocol/discussions)
+Made with ❤️ by [EB DevTech](https://ebdevtech.com)
+
+[⭐ Star this repo](https://github.com/EB-DevTech/Open-Memory-Protocol) · [Read the Spec](./spec/omp-v2.0.md) · [Join the Discussion](https://github.com/EB-DevTech/Open-Memory-Protocol/discussions)
 
 </div>
 

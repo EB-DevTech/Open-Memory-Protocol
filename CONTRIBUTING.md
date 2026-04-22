@@ -6,7 +6,7 @@ Thank you for your interest in contributing to OMP! Every contribution matters �
 
 ### 1. Report Issues
 
-Found a bug, inconsistency, or have a suggestion? [Open an issue](https://github.com/open-memory-protocol/open-memory-protocol/issues/new/choose) using one of our templates:
+Found a bug, inconsistency, or have a suggestion? [Open an issue](https://github.com/EB-DevTech/Open-Memory-Protocol/issues/new/choose) using one of our templates:
 
 - 🐛 **Bug Report** — Something isn't working as documented
 - 💡 **Feature Request** — Suggest an improvement
@@ -87,10 +87,12 @@ All participants must follow our [Code of Conduct](./CODE_OF_CONDUCT.md). We're 
 
 ## Getting Help
 
-- 💬 [GitHub Discussions](https://github.com/open-memory-protocol/open-memory-protocol/discussions) — Ask questions, share ideas
-- 🐛 [Issues](https://github.com/open-memory-protocol/open-memory-protocol/issues) — Report bugs
-- 📧 Email: contribute@openmemoryprotocol.org
+- 💬 [GitHub Discussions](https://github.com/EB-DevTech/Open-Memory-Protocol/discussions) — Ask questions, share ideas
+- 🐛 [Issues](https://github.com/EB-DevTech/Open-Memory-Protocol/issues) — Report bugs
+- 📧 Email: contribute@openmemoryprotocol.com
 
 ---
 
 **Your contributions help ensure that every person owns their AI conversations. Thank you! 🙏**
+
+OMP is a project by [EB DevTech](https://ebdevtech.com).
